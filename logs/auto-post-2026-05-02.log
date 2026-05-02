@@ -1,0 +1,3 @@
+[2026-05-02T11:42:27.485Z] [INFO] 🧪 テスト実行モード
+[2026-05-02T11:42:27.486Z] [INFO] 🚀 投稿処理開始: テスト投稿
+[2026-05-02T11:42:31.189Z] [ERROR] ✗ 投稿処理エラー: net::ERR_NAME_NOT_RESOLVED at https://login.rakuten.co.jp/login

@@ -1,0 +1,27 @@
+{
+  "name": "rakuten-room-auto-post",
+  "version": "1.0.0",
+  "description": "楽天ROOM自動投稿システム - 24時間稼働で女の子向けファッション・雑貨を投稿",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "test": "node src/test.js"
+  },
+  "keywords": [
+    "rakuten",
+    "room",
+    "automation",
+    "posting"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^22.0.0",
+    "axios": "^1.6.0",
+    "node-cron": "^3.0.0",
+    "dotenv": "^16.3.0"
+  },
+  "devDependencies": {}
+}
