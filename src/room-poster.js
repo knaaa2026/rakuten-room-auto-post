@@ -26,7 +26,13 @@ class RoomPoster {
     try {
       this.browser = await puppeteer.launch({
         headless: this.options.headless,
-        args: ['--no-sandbox', '--disable-setuid-sandbox']
+        args: [
+          '--no-sandbox',
+          '--disable-setuid-sandbox',
+          '--disable-dev-shm-usage',
+          '--disable-gpu',
+          '--single-process'
+        ]
       });
       
       this.page = await this.browser.newPage();
@@ -51,7 +57,7 @@ class RoomPoster {
         console.log('✓ 保存されたクッキーを読み込みました');
         
         // クッキーが有効か確認
-        await this.page.goto('https://room.rakuten.co.jp/', { waitUntil: 'networkidle2' });
+        await this.page.goto('https://room.rakuten.co.jp/', { waitUntil: 'networkidle0', timeout: this.options.timeout });
         const isLoggedIn = await this.page.evaluate(() => {
           return document.body.innerText.includes('マイルーム') || 
                  document.querySelector('[data-testid="user-menu"]') !== null;
@@ -65,7 +71,7 @@ class RoomPoster {
 
       // ログインページにアクセス
       console.log('🔐 楽天にログイン中...');
-      await this.page.goto('https://login.rakuten.co.jp/login', { waitUntil: 'networkidle2' });
+      await this.page.goto('https://login.rakuten.co.jp/login', { waitUntil: 'networkidle0', timeout: this.options.timeout });
       
       // メールアドレスを入力
       await this.page.type('input[name="u"]', this.email, { delay: 50 });
@@ -101,7 +107,7 @@ class RoomPoster {
       console.log(`📝 投稿中: ${product.name}`);
       
       // ROOMの投稿ページにアクセス
-      await this.page.goto('https://room.rakuten.co.jp/add', { waitUntil: 'networkidle2' });
+      await this.page.goto('https://room.rakuten.co.jp/add', { waitUntil: 'networkidle0', timeout: this.options.timeout });
       
       // 商品URLを検索欄に入力
       await this.page.type('input[placeholder*="商品URL"]', product.url, { delay: 50 });
